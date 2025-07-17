@@ -33,7 +33,7 @@ image:
 imagePullSecrets: []
 
 loadBalancer:
-  type: nginx
+  type: alb
   affinityCookie:
     enable: true
     affinityCookieExpiration: 600
@@ -41,6 +41,11 @@ loadBalancer:
   # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
   # ingressClassName: nginx
   
+  
+# To change the ALB Ingress type or routing method, update the scheme or targetType below
+  scheme: internet-facing  
+  targetType: ip
+
   nginxIngressAnnotations:
     # Enter annotations here for adding annotations in nginx ingress
     # Example:
@@ -52,6 +57,11 @@ loadBalancer:
     # Example:
     # konghq.com/preserve-host: "true"
     # konghq.com/protocols: "http,https"
+  
+  albIngressAnnotations:
+    # Enter annotations here for adding annotations in ALB ingress
+    # alb.ingress.kubernetes.io/subnets: subnet-7fca5c19 , subnet-f13c9fab
+    
 
   singleHost: 
     secretName: bold-tls
